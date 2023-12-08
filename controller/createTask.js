@@ -1,4 +1,4 @@
-const Task = require("../models/Task.js");
+const Tasks = require("../models/Tasks.js");
 const { nanoid } = require("nanoid");
 
 const createTask = async (req, res) => {
@@ -7,30 +7,30 @@ const createTask = async (req, res) => {
   if (!refreshToken) return res.status(401);
 
   const taskId = "task-" + nanoid(12);
-  const { task_name, task_desc, category, priority, task_date } = req.body;
+  const { name, desc, category, priority, date } = req.body;
 
   try {
-    await Task.create({
+    await Tasks.create({
       id: taskId,
-      task_name: task_name,
-      task_desc: task_desc,
+      name: name,
+      desc: desc,
       category: category,
       priority: priority,
-      task_date: task_date,
+      date: date,
       user_id: userId,
     });
 
-    res.status(201).send({
+    return res.status(201).send({
       error: false,
       message: "task has been created",
       data: {
         id: taskId,
         user_id: userId,
-        task_name: task_name,
+        name: name,
       },
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: true,
       message: error.message,
     });

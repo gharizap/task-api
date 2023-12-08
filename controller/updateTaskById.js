@@ -1,41 +1,40 @@
-const Task = require("../models/Task.js");
+const Tasks = require("../models/Tasks.js");
 
-const updateTaskId = async (req, res) => {
+const updateTaskById = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
   const userId = req.cookies.userId;
   const taskId = req.params.id;
   if (!refreshToken) return res.status(401);
 
-  const taskIsExist = await Task.findOne({
-    where: {
-      id: taskId,
-    },
-  });
-
-  if (!taskIsExist) {
-    return res.status(404).json({
-      error: true,
-      message: "Task not found",
-    });
-  }
-
-  if (userId !== taskIsExist.user_id) {
-    return res.status(401).json({
-      error: true,
-      message: "Unauthorized",
-    });
-  }
-
   try {
-    const { task_name, task_desc, category, priority, task_date } = req.body;
+    const taskIsExist = await Tasks.findOne({
+      where: {
+        id: taskId,
+      },
+    });
 
-    await Task.update(
+    if (!taskIsExist) {
+      return res.status(404).json({
+        error: true,
+        message: "Task not found",
+      });
+    }
+  
+    if (userId !== taskIsExist.user_id) {
+      return res.status(401).json({
+        error: true,
+        message: "Unauthorized",
+      });
+    }
+
+    const { name, desc, category, priority, date } = req.body;
+    await Tasks.update(
       {
-        task_name: task_name,
-        task_desc: task_desc,
+        name: name,
+        desc: desc,
         category: category,
         priority: priority,
-        task_date: task_date,
+        date: date,
       },
       {
         where: {
@@ -44,16 +43,16 @@ const updateTaskId = async (req, res) => {
       }
     );
 
-    res.json({
+    return res.json({
       error: false,
       message: "success",
     });
   } catch (error) {
-    res.status(404).json({
+    return res.status(404).json({
       error: true,
       message: error.message,
     });
   }
 };
 
-module.exports = updateTaskId;
+module.exports = updateTaskById;

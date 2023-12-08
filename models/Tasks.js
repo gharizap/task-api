@@ -3,14 +3,14 @@ const db = require("../config/Database.js");
 
 const { DataTypes } = Sequelize;
 
-const Task = db.define(
-  "task",
+const Tasks = db.define(
+  "tasks",
   {
-    task_name: DataTypes.STRING,
-    task_desc: DataTypes.STRING,
+    name: DataTypes.STRING,
+    desc: DataTypes.STRING,
     category: DataTypes.STRING,
     priority: DataTypes.STRING,
-    task_date: DataTypes.DATE,
+    date: DataTypes.DATE,
     user_id: DataTypes.STRING,
   },
   {
@@ -18,4 +18,4 @@ const Task = db.define(
   }
 );
 
-module.exports = Task;
+module.exports = Tasks;

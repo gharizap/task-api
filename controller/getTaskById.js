@@ -1,4 +1,4 @@
-const Task = require("../models/Task.js");
+const Tasks = require("../models/Tasks.js");
 
 const getTaskById = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
@@ -6,35 +6,29 @@ const getTaskById = async (req, res) => {
   const taskId = req.params.id;
   if (!refreshToken) return res.status(401);
 
-  const taskIsExist = await Task.findOne({
-    where: {
-      id: taskId,
-    },
-  });
-
-  if (!taskIsExist) {
-    return res.status(404).json({
-      error: true,
-      message: "Activity not found",
-    });
-  }
-
-  if (userId !== taskIsExist.user_id) {
-    return res.status(401).json({
-      error: true,
-      message: "Unauthorized",
-    });
-  }
-
   try {
-    const task = await Task.findOne({
+    const task = await Tasks.findOne({
       where: {
         id: taskId,
       },
     });
-    res.status(200).json(task);
+
+    if (!task) {
+      return res.status(404).json({
+        error: true,
+        message: "Task not found",
+      });
+    }
+  
+    if (userId !== task.user_id) {
+      return res.status(401).json({
+        error: true,
+        message: "Unauthorized",
+      });
+    }
+    return res.status(200).json(task);
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: true,
       message: error.message,
     });
