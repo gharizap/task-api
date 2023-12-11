@@ -1,6 +1,6 @@
 # task-api
 
-Ini merupakan sebuah API yang menyediakan fubgsi task dalam aplikasi AIANG
+Ini merupakan sebuah API yang menyediakan fungsi task dalam aplikasi AIANG
 
 ## Create Task
 - **Metode** : POST
