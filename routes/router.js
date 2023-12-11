@@ -8,10 +8,10 @@ const deleteTaskById = require("../controller/deleteTaskById");
 
 const router = express.Router();
 
-router.get("/task", verifyToken, getTask);
-router.get("/task/:id", verifyToken, getTaskById);
-router.post("/task", verifyToken, createTask);
-router.put("/task/:id", verifyToken, updateTaskById);
-router.delete("/task/:id", verifyToken, deleteTaskById);
+router.get("/tasks", verifyToken, getTask);
+router.get("/tasks/:id", verifyToken, getTaskById);
+router.post("/tasks", verifyToken, createTask);
+router.put("/tasks/:id", verifyToken, updateTaskById);
+router.delete("/tasks/:id", verifyToken, deleteTaskById);
 
 module.exports = router;
