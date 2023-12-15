@@ -178,6 +178,49 @@ Ini merupakan sebuah API yang menyediakan fungsi task dalam aplikasi AIANG
       Unauthorized
     }
     ```
+## Get Task Per DATE
+- **Metode** : GET
+- **Headers** : Authentication Bearer Token
+- **URL** : **/tasks/{date}**
+- **Response Body** :
+  ```json
+  {
+    "id": "STRING",
+    "name": "STRING",
+    "desc": "STRING",
+    "category": "STRING",
+    "priority": "STRING",
+    "date": "DATE",
+    "user_id": "STRING",
+    "createdAt": "DATETIME",
+    "updatedAt": "DATETIME"
+  }
+  ```
+- Jika id dari task salah / tidak ditemukan, server akan emngembalikan respons :
+  - **Status Code** : 404
+  - **Response Body** :
+    ```json
+    {
+      "error": true,
+      "message": "Task not found for this date"
+    }
+    ```
+- Jika token salah atau tidak sesuai, server akan mengembalikan respons :
+  - **Status Code** : 403
+  - **Response Body** :
+    ```json
+    {
+      Forbidden
+    }
+    ```
+- Jika token kosong, server akan mengembalikan respons :
+  - **Status Code** : 401
+  - **Response Body** :
+    ```json
+    {
+      Unauthorized
+    }
+    ```
 
 ## Delete Task Per ID
 - **Metode** : DELETE
