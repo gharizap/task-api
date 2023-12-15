@@ -1,10 +1,9 @@
 const Tasks = require("../models/Tasks.js");
 
 const updateTaskById = async (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
-  const userId = req.cookies.userId;
+  const userId = req.userId;
   const taskId = req.params.id;
-  if (!refreshToken) return res.status(401);
+  if (!userId) return res.status(401);
 
   try {
     const taskIsExist = await Tasks.findOne({
