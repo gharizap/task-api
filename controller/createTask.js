@@ -27,6 +27,7 @@ const createTask = async (req, res) => {
         id: taskId,
         user_id: userId,
         name: name,
+        date: date,
       },
     });
   } catch (error) {
