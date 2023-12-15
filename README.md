@@ -181,7 +181,7 @@ Ini merupakan sebuah API yang menyediakan fungsi task dalam aplikasi AIANG
 ## Get Task Per DATE
 - **Metode** : GET
 - **Headers** : Authentication Bearer Token
-- **URL** : **/tasks/{date}**
+- **URL** : **/tasks/date/{date}**
 - **Response Body** :
   ```json
   {
