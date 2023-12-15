@@ -2,9 +2,8 @@ const Tasks = require("../models/Tasks.js");
 const { nanoid } = require("nanoid");
 
 const createTask = async (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
-  const userId = req.cookies.userId;
-  if (!refreshToken) return res.status(401);
+  const userId = req.userId;
+  if (!userId) return res.status(401);
 
   const taskId = "task-" + nanoid(12);
   const { name, desc, category, priority, date } = req.body;

@@ -14,6 +14,5 @@ router.get("/task/:id", verifyToken, getTaskById);
 router.post("/task", verifyToken, createTask);
 router.put("/task/:id", verifyToken, updateTaskById);
 router.delete("/task/:id", verifyToken, deleteTaskById);
-router.get("/task/date/:date", getTaskByDate);
 
 module.exports = router;
