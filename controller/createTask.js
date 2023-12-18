@@ -7,6 +7,12 @@ const createTask = async (req, res) => {
 
   const taskId = "task-" + nanoid(12);
   const { name, desc, category, priority, date } = req.body;
+  if (!name || !desc || !category || !priority || !date){
+    return res.status(400).send({
+      error: true,
+      message: "please fill in all fields"
+    });
+  }
 
   try {
     await Tasks.create({

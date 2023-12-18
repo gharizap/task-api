@@ -27,6 +27,12 @@ const updateTaskById = async (req, res) => {
     }
 
     const { name, desc, category, priority, date } = req.body;
+    if (!name || !desc || !category || !priority || !date){
+      return res.status(400).send({
+        error: true,
+        message: "please fill in all fields"
+      });
+    }
     await Tasks.update(
       {
         name: name,
